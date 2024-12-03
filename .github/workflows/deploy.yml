@@ -1,0 +1,43 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main 
+   pull_resquest: 
+       branches:
+      - main 
+     schedule:
+    - cron:'0*/6***' # BY S-TEN
+
+jobs:
+   build:
+   
+    runs-on: ubuntu-latest
+    
+      strategy:
+        matrix:
+          node-version: [20,x]
+          
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{matrix,node-version}}
+
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Install ffnpeg
+      run: sudo apt-get   install  .y ffnpeg
+      
+    - name: Start application with timeout
+      run: l
+      timeout 21590s npm start # limite l'exécution à 5h 59m 50s
+
+    - name: Save state (Optional)
+      run: l
+      ./save_state.5h
